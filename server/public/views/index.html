@@ -2,7 +2,7 @@
 <html ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Movie search</title>
 
   <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css" />
   <link rel="stylesheet" href="styles/style.css" />
@@ -12,6 +12,18 @@
 
 </head>
 <body>
-
+  <div class="container">
+    <div class="movie-form-container" ng-controller="FormController">
+      <h2>Search for a movie:</h2>
+      <form class="movie-form" ng-submit="getMovieData()">
+        <input type="text" placeholder="Title">
+        <input type="submit" value="Search">
+      </form>
+      <button ng-click="getMovieData()">Click me</button>
+    </div>
+    <div class="movie-display" ng-controller="DisplayController">
+      {{dataFromServer.response.data}}
+    </div>
+  </div>
 </body>
 </html>

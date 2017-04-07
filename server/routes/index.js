@@ -7,7 +7,7 @@ router.get('/', function(req,res){
     res.sendFile(path.resolve('server/public/views/index.html'));
 });
 
-router.get('/info', function(req, res){
+router.get('/movieData', function(req, res){
   res.send('What\'s up pussycat?');
 });
 
