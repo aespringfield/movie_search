@@ -2,7 +2,7 @@
 <html ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Chi MEAN</title>
+  <title></title>
 
   <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css" />
   <link rel="stylesheet" href="styles/style.css" />
@@ -12,46 +12,6 @@
 
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 page-header">
-        <h2>Enter a movie:</h2>
-      </div>
-    </div>
 
-    <div class="row">
-      <div ng-controller="FormController" class="col-md-6">
-        <form class="row">
-          <div class="inputField col-md-12">
-            <input type="text" ng-model="movie.title" placeholder="Title" class="col-md-6"></input>
-          </div>
-          <div class="inputField col-md-12">
-            <input type="text" ng-model="movie.desc" placeholder="Description" class="col-md-6"></input>
-          </div>
-          <div class="inputField col-md-12">
-            <input type="text" ng-model="movie.dir" placeholder="Director" class="col-md-6"></input>
-          </div>
-          <div class="inputField col-md-12">
-            <input type="number" ng-model="movie.time" placeholder="Runtime" class="col-md-6"></input>
-          </div>
-          <div class="inputField col-md-12">
-            <input type="submit" ng-click="pushAndClear(movie)" value="Submit" class="submitBtn btn-lg col-md-6"></input>
-          </div>
-        </form>
-      </div>
-      <div class="row">
-        <div ng-controller="DisplayController" class="col-md-6">
-          <div ng-repeat="movie in movies.movieArray" class="movieContainer">
-            <div class="well movie">
-              <p><b>Title:</b> {{movie.title}}</p>
-              <p><b>Description:</b> {{movie.desc}}</p>
-              <p><b>Director:</b> {{movie.dir}}</p>
-              <p><b>Runtime:</b> {{movie.time}}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </body>
 </html>

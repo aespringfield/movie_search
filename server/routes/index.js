@@ -7,6 +7,10 @@ router.get('/', function(req,res){
     res.sendFile(path.resolve('server/public/views/index.html'));
 });
 
+router.get('/info', function(req, res){
+  res.send('What\'s up pussycat?');
+});
+
 // 404 HERE (WE WOULD NEED TO ADD IT HERE, BUT WE ARE NOT GOING TO NOW)
 
 module.exports = router;
