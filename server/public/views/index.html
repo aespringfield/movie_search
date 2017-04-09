@@ -13,21 +13,33 @@
 </head>
 <body>
   <div class="container">
-    <div class="movie-form-container" ng-controller="FormController">
-      <h2>Search for a movie:</h2>
-      <form class="movie-form" ng-submit="getMovieData(movie.title)">
-        <input ng-model="movie.title" type="text" placeholder="Title">
+    <div class="page-header row">
+    <h2>Search for a movie:</h2>
+    </div>
+    <div class="row">
+    <div class="movie-form-container col-sm-6 col-md-6 col-lg-6" ng-controller="FormController">
+
+      <form class="movie-form" ng-submit="getMovieData(currentMovie)">
+        <input ng-model="currentMovie.titleInput" type="text" placeholder="Title">
         <input type="submit" value="Search">
       </form>
       <p ng-show="searchError.display">{{searchError.msg}}</p>
+      <div ng-show="currentMovie.display" class="current-movie">
+        <p><b>Title: </b>{{currentMovie.data.Title}}</p>
+        <p><b>Director: </b>{{currentMovie.data.Director}}</p>
+        <p><b>Plot: </b>{{currentMovie.data.Plot}}</p>
+        <button ng-click="addToFavorites(currentMovie)">Add to favorites</button>
+      </div>
     </div>
-    <div class="movie-display" ng-controller="DisplayController">
-      <div ng-repeat="movie in movieList">
-      <p><b>Title: </b>{{movie.data.Title}}</p>
-      <p><b>Director: </b>{{movie.data.Director}}</p>
-      <p><b>Plot: </b>{{movie.data.Plot}}</p>
+    <div class="movie-display col-sm-6 col-md-6 col-lg-6" ng-controller="DisplayController">
+      <div ng-repeat="movie in movieList" class="well">
+      <p><b>Title: </b>{{movie.Title}}</p>
+      <p><b>Director: </b>{{movie.Director}}</p>
+      <p><b>Plot: </b>{{movie.Plot}}</p>
+      <button>Remove</button>
     </div>
     </div>
+  </div>
   </div>
 </body>
 </html>

@@ -4,7 +4,15 @@ myApp.controller('FormController', ['$scope', 'MovieService', function($scope, M
   $scope.getMovieData = MovieService.getMovieData;
   $scope.searchError = MovieService.searchError;
   $scope.displaySearchError = MovieService.displaySearchError;
-  $scope.movie = {};
+  $scope.addToFavorites = MovieService.addToFavorites;
+  $scope.currentMovie = {
+    display: false,
+    titleInput: '',
+    reset: function() {
+      this.display = false;
+      delete this.data;
+    }
+  };
 }]);
 
 myApp.controller('DisplayController', ['$scope', 'MovieService', function($scope, MovieService) {
@@ -27,17 +35,26 @@ myApp.factory('MovieService', ['$http', function($http) {
   return {
     movieList: movieList,
     searchError: searchError,
-    getMovieData: function(title) {
+    getMovieData: function(currentMovie) {
       displaySearchError(false);
-      $http.get('http://www.omdbapi.com/?t=' + title + '&y=&plot=full&r=json').then(function(response) {
-        console.log(response.data.Response);
+      $http.get('http://www.omdbapi.com/?t=' + currentMovie.titleInput + '&type=movie&y=&plot=full&r=json').then(function(response) {
+        console.log(response.data);
         if (response.data.Response == "True") {
-          movieList.push(response);
+          currentMovie.titleInput = '';
+          currentMovie.data = response.data;
+          currentMovie.display = true;
         } else {
+          currentMovie.reset();
           displaySearchError(true);
         }
-        console.log(searchError.display);
       });
     },
+    addToFavorites: function(currentMovie) {
+      movieList.push(currentMovie.data);
+      $http.post('/movie', currentMovie.data).then(function(response) {
+        console.log(response);
+      });
+      currentMovie.reset();
+    }
   };
 }]);

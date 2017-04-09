@@ -9,6 +9,7 @@ var db = require('./modules/db.js');
 
 //ROUTE MODULES
 var index = require('./routes/index.js');
+var movie = require('./routes/movie.js');
 
 //APP CONFIG
 app.set('port', (process.env.PORT || 5000));
@@ -20,6 +21,7 @@ app.use(express.static('server/public'));
 
 //ROUTES
 app.use('/', index);
+app.use('/movie', movie);
 
 //LISTEN
 app.listen(app.get('port'), function(){
