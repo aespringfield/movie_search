@@ -15,14 +15,18 @@
   <div class="container">
     <div class="movie-form-container" ng-controller="FormController">
       <h2>Search for a movie:</h2>
-      <form class="movie-form" ng-submit="getMovieData()">
-        <input type="text" placeholder="Title">
+      <form class="movie-form" ng-submit="getMovieData(movie.title)">
+        <input ng-model="movie.title" type="text" placeholder="Title">
         <input type="submit" value="Search">
       </form>
-      <button ng-click="getMovieData()">Click me</button>
+      <p ng-show="searchError.display">{{searchError.msg}}</p>
     </div>
     <div class="movie-display" ng-controller="DisplayController">
-      {{dataFromServer.response.data}}
+      <div ng-repeat="movie in movieList">
+      <p><b>Title: </b>{{movie.data.Title}}</p>
+      <p><b>Director: </b>{{movie.data.Director}}</p>
+      <p><b>Plot: </b>{{movie.data.Plot}}</p>
+    </div>
     </div>
   </div>
 </body>
