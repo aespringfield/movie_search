@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="movie-display col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-controller="DisplayController">
-        <div ng-repeat="movie in movieObj.movieList" class="well">
+        <div ng-repeat="movie in movies.favoritesList" class="well">
           <div class="row">
             <div class="col-sm-4 col-md-4">
               <img class="poster" src={{movie.poster}} alt={{movie.title + "poster"}} title={{movie.title}} />
