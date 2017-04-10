@@ -12,6 +12,7 @@ var MovieSchema = mongoose.Schema({
 
 var Movie = mongoose.model('movies', MovieSchema);
 
+// GET route to retrieve all movies from movies collection
 router.get('/', function(req, res) {
   Movie.find(function(err, allMovies) {
     if (err) {
@@ -22,6 +23,7 @@ router.get('/', function(req, res) {
   });
 });
 
+// POST route to store a movie in movies collection
 router.post('/', function(req, res) {
   var movie = new Movie();
   movie.title = req.body.Title;
@@ -38,6 +40,7 @@ router.post('/', function(req, res) {
   });
 });
 
+// DELETE route to delete a movie from movies collection, based on ID passed as URL parameter
 router.delete('/:id', function(req, res) {
   var _id = req.params.id;
   var query = {_id: _id};

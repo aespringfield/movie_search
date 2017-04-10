@@ -12,38 +12,41 @@
 
 </head>
 <body>
-  <div class="container">
+  <div class="container"> <!--start of container-->
     <div class="row">
-    <div class="page-header">
-      <h2>Search for a movie:</h2>
+      <div class="page-header">
+        <h2>Search for a movie:</h2>
+      </div>
     </div>
-  </div>
     <div class="row">
+      <!--start of div controlled by FormController-->
       <div class="movie-form-container col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-controller="FormController">
-
         <form class="movie-form" ng-submit="getMovieData(currentMovie)">
           <div class="row">
-            <div class="col-xs-8 col-sm-9 col-md-9">
+            <div class="col-xs-8 col-sm-9 col-md-9 col-lg-9">
               <input ng-model="currentMovie.titleInput" class="form-control" type="text" placeholder="Title">
             </div>
             <input type="submit" value="Search" class="btn">
           </div>
         </form>
         <p ng-show="searchError.display">{{searchError.msg}}</p>
+        <!--start of current movie display: shows result of latest search-->
         <div ng-show="currentMovie.display" class="current-movie">
           <p><b>Title: </b>{{currentMovie.data.Title}}</p>
           <p><b>Director: </b>{{currentMovie.data.Director}}</p>
           <p><b>Plot: </b>{{currentMovie.data.Plot}}</p>
           <button ng-click="addToFavorites(currentMovie, getFavorites)" class="btn">Add to favorites</button>
-        </div>
-      </div>
+        </div><!--end of current movie display-->
+      </div><!--end of div controlled by FormController-->
+      <!--start of div controlled by DisplayController-->
       <div class="movie-display col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-controller="DisplayController">
+        <!--start of favorites display: loops through all items in favoritesList-->
         <div ng-repeat="movie in movies.favoritesList" class="well">
           <div class="row">
-            <div class="col-sm-4 col-md-4">
+            <div class="col-sm-4 col-md-4 col-lg-4">
               <img class="poster" src={{movie.poster}} alt={{movie.title + "poster"}} title={{movie.title}} />
             </div>
-            <div class="col-sm-8 col-md-8">
+            <div class="col-sm-8 col-md-8 col-lg-8">
               <p><b>Title: </b>{{movie.title}}</p>
               <p><b>Director: </b>{{movie.director}}</p>
               <p><b>Starring: </b>{{movie.actors}}</p>
@@ -51,11 +54,9 @@
               <button ng-click="deleteFromFavorites($index, getFavorites)" class="btn btn-danger">Remove</button>
             </div>
           </div>
-        </div>
-      </div>
+        </div> <!--end of favorites display-->
+      </div> <!--end of div controlled by DisplayController-->
     </div>
-  </div>
-</div>
-</div>
+  </div><!--end of container-->
 </body>
 </html>
