@@ -3,6 +3,14 @@
 }
 
 .submitBtn {
-  background-color: salmon;
-  color: linen;
+  left: 0px;
+}
+
+.poster {
+  position: relative;
+  width: 100%;
+}
+
+.movie-form {
+  padding: 0 0 20px 0;
 }

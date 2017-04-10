@@ -13,33 +13,49 @@
 </head>
 <body>
   <div class="container">
-    <div class="page-header row">
-    <h2>Search for a movie:</h2>
-    </div>
     <div class="row">
-    <div class="movie-form-container col-sm-6 col-md-6 col-lg-6" ng-controller="FormController">
+    <div class="page-header">
+      <h2>Search for a movie:</h2>
+    </div>
+  </div>
+    <div class="row">
+      <div class="movie-form-container col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-controller="FormController">
 
-      <form class="movie-form" ng-submit="getMovieData(currentMovie)">
-        <input ng-model="currentMovie.titleInput" type="text" placeholder="Title">
-        <input type="submit" value="Search">
-      </form>
-      <p ng-show="searchError.display">{{searchError.msg}}</p>
-      <div ng-show="currentMovie.display" class="current-movie">
-        <p><b>Title: </b>{{currentMovie.data.Title}}</p>
-        <p><b>Director: </b>{{currentMovie.data.Director}}</p>
-        <p><b>Plot: </b>{{currentMovie.data.Plot}}</p>
-        <button ng-click="addToFavorites(currentMovie)">Add to favorites</button>
+        <form class="movie-form" ng-submit="getMovieData(currentMovie)">
+          <div class="row">
+            <div class="col-xs-8 col-sm-9 col-md-9">
+              <input ng-model="currentMovie.titleInput" class="form-control" type="text" placeholder="Title">
+            </div>
+            <input type="submit" value="Search" class="btn">
+          </div>
+        </form>
+        <p ng-show="searchError.display">{{searchError.msg}}</p>
+        <div ng-show="currentMovie.display" class="current-movie">
+          <p><b>Title: </b>{{currentMovie.data.Title}}</p>
+          <p><b>Director: </b>{{currentMovie.data.Director}}</p>
+          <p><b>Plot: </b>{{currentMovie.data.Plot}}</p>
+          <button ng-click="addToFavorites(currentMovie, getFavorites)" class="btn">Add to favorites</button>
+        </div>
+      </div>
+      <div class="movie-display col-xs-12 col-sm-12 col-md-6 col-lg-6" ng-controller="DisplayController">
+        <div ng-repeat="movie in movieObj.movieList" class="well">
+          <div class="row">
+            <div class="col-sm-4 col-md-4">
+              <img class="poster" src={{movie.poster}} alt={{movie.title + "poster"}} title={{movie.title}} />
+            </div>
+            <div class="col-sm-8 col-md-8">
+              <p><b>Title: </b>{{movie.title}}</p>
+              <p><b>Director: </b>{{movie.director}}</p>
+              <p><b>Starring: </b>{{movie.actors}}</p>
+              <p><b>Plot: </b>{{movie.plot}}</p>
+              <button ng-click="deleteFromFavorites($index, getFavorites)" class="btn btn-danger">Remove</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="movie-display col-sm-6 col-md-6 col-lg-6" ng-controller="DisplayController">
-      <div ng-repeat="movie in movieList" class="well">
-      <p><b>Title: </b>{{movie.Title}}</p>
-      <p><b>Director: </b>{{movie.Director}}</p>
-      <p><b>Plot: </b>{{movie.Plot}}</p>
-      <button>Remove</button>
-    </div>
-    </div>
   </div>
-  </div>
+</div>
+</div>
 </body>
 </html>

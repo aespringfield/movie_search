@@ -12,6 +12,16 @@ var MovieSchema = mongoose.Schema({
 
 var Movie = mongoose.model('movies', MovieSchema);
 
+router.get('/', function(req, res) {
+  Movie.find(function(err, allMovies) {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+    res.send(allMovies);
+  });
+});
+
 router.post('/', function(req, res) {
   var movie = new Movie();
   movie.title = req.body.Title;
@@ -25,6 +35,18 @@ router.post('/', function(req, res) {
       res.sendStatus(500);
     }
     res.send(savedMovie);
+  });
+});
+
+router.delete('/:id', function(req, res) {
+  var _id = req.params.id;
+  var query = {_id: _id};
+  Movie.remove(query, function(err, movieToDelete) {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+    res.send(movieToDelete);
   });
 });
 

@@ -5,6 +5,7 @@ myApp.controller('FormController', ['$scope', 'MovieService', function($scope, M
   $scope.searchError = MovieService.searchError;
   $scope.displaySearchError = MovieService.displaySearchError;
   $scope.addToFavorites = MovieService.addToFavorites;
+  $scope.getFavorites = MovieService.getFavorites;
   $scope.currentMovie = {
     display: false,
     titleInput: '',
@@ -16,11 +17,29 @@ myApp.controller('FormController', ['$scope', 'MovieService', function($scope, M
 }]);
 
 myApp.controller('DisplayController', ['$scope', 'MovieService', function($scope, MovieService) {
-  $scope.movieList = MovieService.movieList;
+  $scope.movieObj = MovieService.movieObj;
+  $scope.movieList = MovieService.movieObj.movieList;
+  $scope.deleteFromFavorites = MovieService.deleteFromFavorites;
+  $scope.getFavorites = MovieService.getFavorites;
+  $scope.getFavorites();
+  $scope.printIndex = function() {
+    console.log($index);
+  };
+
+  // $scope.plotShrinker = function(plot) {
+  //   var firstPeriod = plotString.indexOf('.');
+  //   var firstSent = plotString.substring(0, firstPeriod);
+  //   var restOfPlot = plotString.substring(firstPeriod, plotString.length);
+  //   return {firstSent: firstSent, restOfPlot: restOfPlot, shrunk: true};
+  // };
+
+
 }]);
 
 myApp.factory('MovieService', ['$http', function($http) {
-  var movieList = [];
+  var movieObj = {
+    movieList: []
+  };
   var searchError = {
     display: false,
     msg: "No movie found"
@@ -33,11 +52,11 @@ myApp.factory('MovieService', ['$http', function($http) {
     }
   };
   return {
-    movieList: movieList,
+    movieObj: movieObj,
     searchError: searchError,
     getMovieData: function(currentMovie) {
       displaySearchError(false);
-      $http.get('http://www.omdbapi.com/?t=' + currentMovie.titleInput + '&type=movie&y=&plot=full&r=json').then(function(response) {
+      $http.get('http://www.omdbapi.com/?t=' + currentMovie.titleInput + '&type=movie&y=&plot=short&r=json').then(function(response) {
         console.log(response.data);
         if (response.data.Response == "True") {
           currentMovie.titleInput = '';
@@ -49,12 +68,24 @@ myApp.factory('MovieService', ['$http', function($http) {
         }
       });
     },
-    addToFavorites: function(currentMovie) {
-      movieList.push(currentMovie.data);
+    addToFavorites: function(currentMovie, getFavorites) {
       $http.post('/movie', currentMovie.data).then(function(response) {
         console.log(response);
+        getFavorites();
       });
       currentMovie.reset();
+    },
+    getFavorites: function() {
+      $http.get('/movie').then(function(response){
+        movieObj.movieList = response.data;
+      });
+    },
+    deleteFromFavorites: function(index, getFavorites) {
+      var _id = movieObj.movieList[index]._id;
+      $http.delete('/movie/' + _id).then(function(response) {
+        console.log(response);
+        getFavorites();
+      });
     }
   };
 }]);
