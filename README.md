@@ -1,27 +1,61 @@
-Welcome to your 5th Weekend Challenge!
+# Movie Search
 
-For this challenge, you will be working with Angular and the OMDB API to build an application that can search movies, and then a user can store their favorites!
+An application that searches for movies using the Open Movie Database (OMDb) API and enables a user to saves & display favorites. First Angular project & first project using an API.
 
-Base Mode
-Your application will need to be built from the ground up using Angular, Node, Express, and Bootstrap. The requirements of the application are:
+NOTE: this project will need to be adapted for changes in the OMDb API, which has since gone private.
 
-There should be two views to the application, one side that searches and displays movie information made available from OMDB. This should be accomplished by having an entry field for the search string, then a submit button that sends the information to OMDB.
+## Getting Started
 
-When the API returns the response, the response should be data bound between an object and the response so that the search information appears as soon as the response returns from the API.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-You MUST use an Angular factory to send the API call ($http).
+### Prerequisites
 
-The information that is returned from the API will be a movie object. You must display some of the movie information on the DOM in a meaningful way. Additionally, you must have an 'add to favorites' button on those results.
+* [npm](https://www.npmjs.com/) - Package manager for JavaScript
+* [Grunt](https://gruntjs.com/) - JavaScript task runner
+* [Node.js](https://nodejs.org/en/) - JavaScript runtime
+* [MongoDB](https://www.mongodb.com/) - Database used
 
-When the 'add to favorites' button is clicked, it should record the information for the movie and store it into an array of favorites.
+### Installing
 
-The other view should display the favorite movies selected by the user.
+Download files
 
-Hard Mode
-When a favorite is added to the favorites list, store the favorites list in a Mongo Database.
+Install dependencies
 
-Pro Mode
-Add the ability to remove a movie from the Mongo Database, and ensure that the favorites view updates as well.
+```
+$ npm install
+```
 
-Master Mode
-Host the application on Heroku and mLabs. No need to do a data dump of an existing database.
+Run Grunt in the root directory
+
+```
+$ grunt
+```
+
+Access the local installation via localhost.
+
+## Deployment
+
+Deployed using hosting by [Heroku](https://www.heroku.com/) and [mlab](https://mlab.com/).
+
+## Built With
+
+* [AngularJS](https://angularjs.org/) - JavaScript framework
+* [Node.js](https://nodejs.org/en/) - JavaScript runtime
+* [Express](https://expressjs.com/) - Node.js framework
+* [MongoDB](https://www.mongodb.com/) - Database used
+* [Bootstrap](http://getbootstrap.com/) - Styling framework
+* [npm](https://www.npmjs.com/) - Dependency management
+* [Grunt](https://gruntjs.com/) - Task runner
+
+## Author
+
+* [**Anna Springfield**](https://github.com/aespringfield)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Thanks to the instructors at Prime Academy for inspiring this project
+* Thanks to Brian Fritz, creator of the OMDb API
